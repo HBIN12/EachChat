@@ -5,63 +5,24 @@
     <title>EachChat</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-    <style>
-        #form {
-            background: Gainsboro;
-            padding: 0.25rem;
-            position: fixed;
-            bottom: 0;
-            left: 25%;
-            right: 25%;
-            display: flex;
-            height: 3rem;
-            box-sizing: border-box;
-            backdrop-filter: blur(10px);
-            border-radius: 3rem;
-            background-image: radial-gradient(circle at 50% -20.71%, #f6ffff 0, #d7effa 25%, #b5def2 50%, #94cceb 75%, #75bbe6 100%);
-        }
-
-        #input {
-            border: none;
-            padding: 0 1rem;
-            flex-grow: 1;
-            border-radius: 2rem;
-            margin: 0.25rem;
-        }
-
-        #input:focus {
-            outline: none;
-        }
-
-        #form>button {
-            background-image: radial-gradient(circle at 50% -20.71%, #bae0e6 0, #bbe0e9 6.25%, #bcdfeb 12.5%, #bedfed 18.75%, #c0deef 25%, #c3ddf0 31.25%, #c6dcf1 37.5%, #c9dbf2 43.75%, #cddaf2 50%, #d1d9f2 56.25%, #d5d8f1 62.5%, #d9d7f0 68.75%, #ddd6ee 75%, #e1d5ed 81.25%, #e4d4ea 87.5%, #e8d3e8 93.75%, #ebd2e5 100%);
-            border: none;
-            padding: 0 1rem;
-            margin: 0.25rem;
-            border-radius: 3rem;
-            outline: none;
-            color: cadetblue;
-            font-weight: bold;
-        }
-    </style>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/chatbox.css">
 </head>
 
-<body>
+<body class="bg-light">
+    <div class="container-fluid">
         <div class="row text-center">
             <div class="col" id="roomid"></div>
         </div>
         <div id="message">
-            <div class="chat-receiver">
-                <div><img src="https://ui-avatars.com/api/?background=0081ff&color=ffffff&rounded=flase&size=128&length=4&name=`+ datas.name + `"></div>
-                <div>demo</div>
-                <div><div class="chat-right_triangle"></div><span>demo</span></div>
-            </div>
         </div>
-        <form id="form" action="" class="mt-2">
-            <input id="input" autocomplete="off" /><button>发送</button>
+        <div class="row "></div>
+        <form id="form" action="" class="fixed-bottom me-3 ms-3 mb-1">
+            <input id="input" autocomplete="off" class="col-10 border-3 border-start-0 border-top-0 border-end-0 border-info" ><button class="border-0 rounded-3 col-2"><svg t="1655261456578" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2974" width="20" height="20"><path d="M931.392 11.264L45.12 530.688c-28.736 16.896-43.52 39.424-45.12 61.248v8.128c2.048 26.112 23.04 49.984 61.632 60.416l171.968 46.592a34.304 34.304 0 0 0 41.28-25.536 35.584 35.584 0 0 0-23.808-43.136L79.68 592l873.408-511.872-95.232 703.488c-1.408 10.432-9.152 15.68-18.752 12.992l-365.632-100.288 296.32-305.856a36.416 36.416 0 0 0 0-50.24 33.728 33.728 0 0 0-48.704 0l-324.8 335.36a110.72 110.72 0 0 0-7.872 9.088 35.52 35.52 0 0 0-16.128 30.784 104 104 0 0 0-5.248 32.64v206.4c0 49.664 53.568 79.168 93.568 51.712l166.272-114.368c10.24-6.976 16-19.136 15.232-31.872a35.712 35.712 0 0 0-19.2-29.504 33.28 33.28 0 0 0-34.24 2.304L435.84 937.856v-178.432l385.472 105.6c49.6 13.632 97.472-19.072 104.576-71.808l97.152-717.568c8.448-60.48-40-94.72-91.648-64.384z" fill="#ffffff" p-id="2975"></path></svg></button>
         </form>
+        </div>
+    </div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/jquery.min.js"></script>
