@@ -1,0 +1,13 @@
+
+> socket-chat-example@0.0.1 start
+> node index.js
+
+Socket.IO server running at http://localhost:3001/
+npm ERR! path /root/EachChat
+npm ERR! command failed
+npm ERR! signal SIGHUP
+npm ERR! command sh -c node index.js
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2022-06-14T15_49_46_092Z-debug-0.log
+Socket.IO server running at http://localhost:3001/
