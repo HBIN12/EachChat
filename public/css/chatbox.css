@@ -1,11 +1,11 @@
 body{
       background-color: white;
-      font-family: "STKaiti";
       margin-bottom:5rem;
+      padding-bottom: 30px; 
     }
     .chat-sender{
       clear:both;
-      font-size: 80%;
+      font-size: 85%;
     }
     .chat-sender div:nth-of-type(1){
       float: left;
@@ -17,19 +17,11 @@ body{
       font-size: 70%;
       text-align: left;
     }
-    .chat-sender div:nth-of-type(3){
-      background-color: white;
-      float: left;
-      font: bold;
-      margin: 0 50px 10px 7px;
-      padding: 10px 10px 10px 10px;
-      border-radius:7px;
-      text-indent: -12px;
-    }
+
 
     .chat-receiver{
       clear:both;
-      font-size: 80%;
+      font-size: 85%;
     }
     .chat-receiver div:nth-of-type(1){
       float: right;
@@ -41,14 +33,49 @@ body{
       font-size: 70%;
       text-align: right;
     }
-    .chat-receiver div:nth-of-type(3){
-      float:right;
-      background-color: #95EC95;
-      margin: 0px 7px 10px 50px;
-      padding: 10px 10px 10px 10px;
-      border-radius:7px;
-      font: bold;
+    .chat-sender div:nth-of-type(3), .chat-receiver div:nth-of-type(3){
+      border-radius: 0.7rem;
+      max-width: 75%
     }
+    
+    .chat-sender div:nth-of-type(3){
+      background-color: #ffffff;
+      float: left;
+      margin-left: 1em;
+      padding: 10px 10px 10px 10px;
+    }
+    .chat-receiver div:nth-of-type(3){
+      background-color: #95EC95;
+      float: right;
+      margin-right: 10px;
+      padding: 10px 10px 10px 20px;
+    }
+
+    .chat-sender div:nth-of-type(3) span, .chat-receiver div:nth-of-type(3) span{
+      /* display: block; */
+      word-wrap: break-word;
+      padding: 0;
+      margin: 0;
+     }
+     
+     .messages span{
+      color: #000;
+     }
+    .chat-sender div:nth-of-type(3){
+      background-color: #ffffff;
+      float: left;
+      margin-left: 1em;
+      margin-bottom: 10px;
+      padding: 10px 10px 10px 10px;
+    }
+    .chat-receiver div:nth-of-type(3){
+      background-color: #95EC95;
+      float: right;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      padding: 10px 10px 10px 20px;
+    }
+    
 
     .chat-receiver div:first-child img,
     .chat-sender div:first-child img{
@@ -121,7 +148,7 @@ body{
   form>button:focus{
     outline: none;
   }
-  form>button {
+  button {
       background-image: radial-gradient(circle at 50% -20.71%, #bae0e6 0, #bbe0e9 6.25%, #bcdfeb 12.5%, #bedfed 18.75%, #c0deef 25%, #c3ddf0 31.25%, #c6dcf1 37.5%, #c9dbf2 43.75%, #cddaf2 50%, #d1d9f2 56.25%, #d5d8f1 62.5%, #d9d7f0 68.75%, #ddd6ee 75%, #e1d5ed 81.25%, #e4d4ea 87.5%, #e8d3e8 93.75%, #ebd2e5 100%);
       /* border: none;
       padding: 0 1rem;

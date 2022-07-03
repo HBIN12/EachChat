@@ -3,7 +3,7 @@ const app = new express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3001;
-
+var ss = require('socket.io-stream');
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
@@ -17,6 +17,13 @@ io.on('connection', (socket) => {
   socket.on('send message', (datas) => {
     io.to(datas.linkcode).emit('send message',datas);
   });
+
+  ss(socket).on('file', function(stream, datas) {
+    var outgoingstream = ss.createStream();
+    ss(io).emit('file', outgoingstream, datas);
+    stream.pipe(outgoingstream)
+  });
+
 });
 
 http.listen(port, () => {
