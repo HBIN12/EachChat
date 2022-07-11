@@ -77,7 +77,6 @@
                     console.log($('#input').val())
                     console.log(datas.msg)
                     datas['sid'] = sid
-
                     socket.emit('send message', datas);
                     input.value = '';
                 }
@@ -124,43 +123,67 @@
                 console.log("发送文件")
                 var file = e.target.files[0];
                 if (!!file) {
-                    var stream = ss.createStream();
-                    console.log(file)
                     datas['filename'] = file.name
                     datas['sid'] = sid
                     // upload a file to the server.
-                    ss(socket).emit('file', stream, datas);
-                    ss.createBlobReadStream(file).pipe(stream);
+                    uploadfile(file);
                     $("#file").val("");
                 }
             });
-            ss(socket).on('file', function (stream, datas) {
 
-                if (datas.linkcode = getQueryString("linkcode")) {
-                    $("#message").append(`<div class="chat-notice">
+            socket.on('file', function (datas) {
+                $("#message").append(`<div class="chat-notice">
             <span>`+ datas.name + "发送文件" + `"` + datas.filename + `"` + `</span>
         </div>`)
-                    if (datas.sid != sid) {
-                        var r = confirm("用户" + datas.name + "  --分享文件-- << " + datas.filename + " >>\n" + "是否下载？");
-                        if (r == true) {
-                            downloadFiel(stream, datas.filename)
-                        }
+
+
+            });
+
+            socket.on('file', function (datas) {
+                if (datas.sid != sid) {
+                    var r = confirm("收到一个文件\n用户：" + datas.name + "\n分享文件：" + datas.filename + " \n" + "温馨提醒：文件只保存5分钟请及时下载！\n是否下载？");
+                    if (r == true) {
+                        download(datas)
                     }
                 }
             });
+
+            function uploadfile(file) {
+            var pd = new FormData();
+            pd.append("file", file);
+            $.ajax({
+                type: "POST",
+                url: "/uploadfile",
+                data: pd,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 1) {
+                        window.alert("发送文件成功");
+                        datas['filename']=data.filename
+                        datas['uuid']=data.uuid
+                        socket.emit("file",datas);
+                    }
+                    else {
+                        window.alert("上传失败");
+                    }
+                    $("#file").val("");
+                    
+                },
+                error: function () {
+                    window.alert("上传异常");
+                    $("#file").val("");
+                    
+                }
+
+            });
+        }
             /**
-            * 下载文件流
-            * @param {*} data 接口返回的文件流
-            * @param {*} fileName 下载的文件名 eg: 客户名单.excel
+            * 下载文件
             */
-            function downloadFiel(data, fileName) {
-                const elink = document.createElement('a')
-                elink.download = fileName
-                const blob = new Blob([data])
-                elink.href = URL.createObjectURL(blob)
-                document.body.appendChild(elink)
-                elink.click()
-                document.body.removeChild(elink)
+            function download(datas) {
+                window.location.href = "/download?"+"uuid="+datas.uuid+"&filename="+datas.filename;
             }
         });
 

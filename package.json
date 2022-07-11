@@ -6,8 +6,10 @@
     "bootstrap": "^5.2.0-beta1",
     "express": "^4.18.1",
     "jquery": "^3.6.0",
+    "multer": "^1.4.4",
     "socket.io": "^4.5.1",
-    "socket.io-stream": "^0.9.1"
+    "socket.io-stream": "^0.9.1",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "node index.js"
