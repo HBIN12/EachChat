@@ -13,18 +13,19 @@
         <div class="row text-center">
             <div class="col" id="roomid"></div>
         </div>
+                <!-- 进度条 -->
+                <div class="row mt-1 me-3 ms-3">
+                    <div class="progress rounded-pill p-0" style="display: none;">
+                        <div id="progress" class="progress-bar progress-bar-animated progress-bar-striped bg-info"
+                            style="width: 0;">
+                        </div>
+                    </div>
+                </div>
 
         <div id="message">
         </div>
 
         <form id="form" action="" class="fixed-bottom">
-            <div class="row mt-1  me-3 ms-3 mb-1">
-                <div class="progress rounded-pill p-0" style="display: none;">
-                    <div id="progress" class="progress-bar progress-bar-animated progress-bar-striped bg-info"
-                        style="width: 0;">
-                    </div>
-                </div>
-            </div>
             <input type="file" id="file" style="display: none">
             <div class="row me-3 ms-3 mb-3">
                 <button id="uploadfile" style="height: 40px;" class="border-0 rounded-3 col-2 "><svg t="1656835101187"
@@ -121,6 +122,7 @@
             });
             $("#file").change(function (e) {
                 console.log("发送文件")
+                $(".progress").show();
                 var file = e.target.files[0];
                 if (!!file) {
                     datas['filename'] = file.name
@@ -158,8 +160,23 @@
                 cache: false,
                 processData: false,
                 contentType: false,
+                xhr: function () {
+                    myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // check if upload property exists 
+                        myXhr.upload.addEventListener('progress', function (e) {
+                            var loaded = e.loaded;//已经上传大小情况
+                            var tot = e.total;//附件总大小
+                            var per = Math.floor(100 * loaded / tot).toFixed(2);
+                            $("#progress").attr({ "style": "width: " + per + "%" });//设置进度显示百分比
+                            // $("#progress").css("width", per + "%"); //设置完成的进度条宽度
+
+                        }, false); // for handling the progress of the upload
+                    }
+                    return myXhr;
+                },
                 success: function (data) {
                     if (data.code == 1) {
+                        $(".progress").hide();
                         window.alert("发送文件成功");
                         datas['filename']=data.filename
                         datas['uuid']=data.uuid
@@ -167,6 +184,7 @@
                     }
                     else {
                         window.alert("上传失败");
+                        $(".progress").hide();
                     }
                     $("#file").val("");
                     
