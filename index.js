@@ -59,8 +59,11 @@ app.post("/uploadfile", upload.single("file"), async function (req, res) {
       fs.renameSync(uploadpath + file.filename, uploadpath + uuid);      
       res.json({ "code": 1, "msg": "上传成功" ,"filename":filename,"uuid":uuid})
       setTimeout(function(){
+        try {
           fs.unlinkSync(uploadpath + uuid)
-           },30000)
+        } catch (error) {
+        }
+           },300000)
   }
   catch (e) {
       console.log(e);
